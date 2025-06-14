@@ -1,4 +1,4 @@
-package Problem_11_06_25;
+package PracticeProblem;
 
 import java.util.Scanner;
 class Celsius_to_Fahrenheit_Conversion {

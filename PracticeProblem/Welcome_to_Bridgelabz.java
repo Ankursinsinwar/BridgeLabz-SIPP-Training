@@ -1,4 +1,4 @@
-package Problem_11_06_25;
+package PracticeProblem;
 
 class Welcome_to_Bridgelabz {
     public static void main(String[] args) {

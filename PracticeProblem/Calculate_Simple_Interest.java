@@ -1,4 +1,4 @@
-package Problem_11_06_25;
+package PracticeProblem;
 
 import java.util.Scanner;
 class Calculate_Simple_Interest {

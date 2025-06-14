@@ -1,4 +1,4 @@
-package Problem_11_06_25;
+package PracticeProblem;
 
 import java.util.Scanner;
 class Add_Two_Numbers {

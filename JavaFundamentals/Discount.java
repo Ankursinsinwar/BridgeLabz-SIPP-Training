@@ -1,5 +1,5 @@
 // Question 4
-package Problem_12_06_25;
+package JavaFundamentals;
 
 import java.util.Scanner;
 public class Discount {

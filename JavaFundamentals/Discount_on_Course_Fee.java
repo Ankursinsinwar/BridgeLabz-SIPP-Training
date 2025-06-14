@@ -1,5 +1,5 @@
 // Question 5
-package Problem_12_06_25;
+package JavaFundamentals;
 
 class Discount_on_Course_Fee {
     public static void main(String[] args) {

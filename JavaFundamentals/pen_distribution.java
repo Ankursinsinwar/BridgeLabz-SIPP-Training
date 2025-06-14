@@ -1,5 +1,5 @@
 // Question 2
-package Problem_12_06_25;
+package JavaFundamentals;
 
 class pen_distribution{
 	public static void main(String[] args){

@@ -1,5 +1,5 @@
 // Question 9
-package Problem_12_06_25;
+package JavaFundamentals;
 
 public class Kilometers_to_miles {
     public static void main(String[] args) {

@@ -1,5 +1,5 @@
 // Question 6
-package Problem_12_06_25;
+package JavaFundamentals;
 
 public class Age_of_Harry {
     public static void main(String[] args) {

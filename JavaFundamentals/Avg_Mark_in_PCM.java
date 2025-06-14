@@ -1,5 +1,5 @@
 // Question 7
-package Problem_12_06_25;
+package JavaFundamentals;
 
 public class Avg_Mark_in_PCM {
     public static void main(String[] args) {

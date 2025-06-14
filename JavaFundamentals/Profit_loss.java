@@ -1,5 +1,5 @@
 // Question 3
-package Problem_12_06_25;
+package JavaFundamentals;
 
 class Profit_loss {
     public static void main(String[] args) {

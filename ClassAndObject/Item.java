@@ -33,7 +33,6 @@ class Item {
         Item item = new Item(101, "Pen", 5);
                 
         System.out.println("\n=== Item details ===");
-        checker.displayResult();
         item.displayDetails();
         int quantity = 10;
         System.out.println("Total Cost for " + quantity + " items: Rs. " + item.calculateTotalCost(quantity));

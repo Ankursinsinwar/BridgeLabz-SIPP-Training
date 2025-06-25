@@ -32,7 +32,7 @@ public class BankAccount {
 
     // Method to display current balance
     public void displayBalance() {
-        System.out.println("Current Balance: Rs. " + balance);
+        System.out.println("\nacc. Holder: " + accountHolder +  "\nacc. Number: " + accountNumber + "\nCurrent Balance: Rs. " + balance);
     }
 
     // Main method

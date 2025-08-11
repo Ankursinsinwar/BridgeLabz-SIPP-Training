@@ -1,0 +1,40 @@
+Class Patient
+        Attribute id
+        Attribute name
+        Attribute age
+
+    Constructor(id, name, age)
+        Set this.id = id
+        Set this.name = name
+        Set this.age = age
+
+
+Class PatientManager
+        Attribute patientMap
+
+    Constructor()
+        Create empty patientMap
+
+    Method addPatient(patient)
+        Put (patient.id, patient) into patientMap
+
+    Method getPatient(id)
+        Return patientMap[id]
+
+    Method updatePatient(id, newName, newAge)
+        If id in patientMap
+            patientMap[id].name = newName
+            patientMap[id].age = newAge
+
+    Method deletePatient(id)
+        Remove id from patientMap
+
+
+Main
+    Create manager = new PatientManager()
+    Call manager.addPatient(new Patient(1, "Ankur", 30))
+    Call manager.addPatient(new Patient(2, "David", 45))
+
+    Print manager.getPatient(1).name
+    Call manager.updatePatient(1, "Ankur", 31)
+    Call manager.deletePatient(2)

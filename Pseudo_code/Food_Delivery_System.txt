@@ -1,0 +1,55 @@
+Class Customer
+    Attribute name
+    Attribute address
+
+    Constructor(name, address)
+        Set this.name = name
+        Set this.address = address
+
+
+Class Restaurant
+    Attribute name
+    Attribute location
+
+    Constructor(name, location)
+        Set this.name = name
+        Set this.location = location
+
+
+Class DeliveryBoy
+    Attribute name
+    Attribute phoneNumber
+
+    Constructor(name, phoneNumber)
+        Set this.name = name
+        Set this.phoneNumber = phoneNumber
+
+
+Class Order
+    Attribute customer
+    Attribute restaurant
+    Attribute deliveryBoy
+    Attribute orderDetails
+
+    Constructor(customer, restaurant, deliveryBoy, orderDetails)
+        Set this.customer = customer
+        Set this.restaurant = restaurant
+        Set this.deliveryBoy = deliveryBoy
+        Set this.orderDetails = orderDetails
+
+    Method displayOrder()
+        Print "Customer: " + customer.name
+        Print "Address: " + customer.address
+        Print "Restaurant: " + restaurant.name
+        Print "Location: " + restaurant.location
+        Print "Delivery Boy: " + deliveryBoy.name
+        Print "Order Details: " + orderDetails
+
+
+Main
+    Create cust = new Customer("Ankur", "Township")
+    Create rest = new Restaurant("Pizza Hut", "Hiway Plaza")
+    Create boy = new DeliveryBoy("Netesh", "5798746789")
+
+    Create order = new Order(cust, rest, boy, "Large Panner Pizza")
+    Call order.displayOrder()

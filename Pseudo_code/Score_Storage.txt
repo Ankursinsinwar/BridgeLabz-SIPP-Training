@@ -1,0 +1,20 @@
+Class StudentScoreManager
+        Attribute scores
+
+    Constructor()
+        Create empty scores
+
+    Method addScore(name, score)
+        Put (name, score) into scores
+
+    Method displayHighestScorer()
+        highest = Entry with max score in scores
+        Print "Highest Scorer: " + highest.key + " with score " + highest.value
+
+
+Main
+    Create manager = new StudentScoreManager()
+    Call manager.addScore("Ankur", 85)
+    Call manager.addScore("David", 92)
+
+    Call manager.displayHighestScorer()

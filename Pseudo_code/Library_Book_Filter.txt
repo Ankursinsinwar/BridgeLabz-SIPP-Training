@@ -1,0 +1,33 @@
+Class Book
+    Attribute title
+    Attribute publishedYear
+    Attribute rating
+
+    Constructor(title, publishedYear, rating)
+        Set this.title = title
+        Set this.publishedYear = publishedYear
+        Set this.rating = rating
+
+
+Class Library
+    Attribute books
+
+    Constructor()
+        Create empty books list
+
+    Method addBook(book)
+        Add book to books list
+
+    Method filterBooks()
+        For each book in books
+            If book.publishedYear > 2015 AND book.rating > 4.5
+                Print book.title
+
+
+Main
+    Create lib = new Library()
+    Call lib.addBook(new Book("Java Basics", 2016, 4.6))
+    Call lib.addBook(new Book("Python for AIML", 2020, 4.8))
+    Call lib.addBook(new Book("AI Revolution", 2022, 4.9))
+
+    Call lib.filterBooks()

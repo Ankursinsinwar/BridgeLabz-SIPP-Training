@@ -1,0 +1,40 @@
+class Graph
+    attributes: adjacencyList, riskLevel[zone]
+    method addEdge(zone1, zone2)
+        adjacencyList[zone1].add(zone2)
+        adjacencyList[zone2].add(zone1)
+
+function dfs(zone, visited, threshold, graph, currentCluster)
+    visited[zone] = true
+    if graph.riskLevel[zone] >= threshold
+        currentCluster.add(zone)
+        for neighbor in graph.adjacencyList[zone]
+            if not visited[neighbor]
+                dfs(neighbor, visited, threshold, graph, currentCluster)
+
+function findHighRiskZones(graph, threshold)
+    visited = boolean array
+    clusters = []
+    for zone in graph.nodes
+        if not visited[zone] and graph.riskLevel[zone] >= threshold
+            currentCluster = []
+            dfs(zone, visited, threshold, graph, currentCluster)
+            if currentCluster.size > 0
+                clusters.add(currentCluster)
+    return clusters
+
+main()
+    g = new Graph()
+    g.addEdge("ZoneA", "ZoneB")
+    g.addEdge("ZoneB", "ZoneC")
+    g.addEdge("ZoneD", "ZoneE")
+
+    g.riskLevel["ZoneA"] = 9
+    g.riskLevel["ZoneB"] = 8
+    g.riskLevel["ZoneC"] = 3
+    g.riskLevel["ZoneD"] = 10
+    g.riskLevel["ZoneE"] = 7
+
+    threshold = 7
+    highRiskClusters = findHighRiskZones(g, threshold)
+    print highRiskClusters

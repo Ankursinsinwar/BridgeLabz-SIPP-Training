@@ -1,0 +1,31 @@
+class Flight
+    attributes: flightId, price, duration
+
+function mergeSort(flights, comparator)
+    if flights size <= 1
+        return flights
+    mid = size / 2
+    left = mergeSort(flights[0..mid], comparator)
+    right = mergeSort(flights[mid..end], comparator)
+    return merge(left, right, comparator)
+
+function merge(left, right, comparator)
+    result = []
+    i = j = 0
+    while i < left.size and j < right.size
+        if comparator(left[i], right[j]) <= 0
+            result.add(left[i]); i++
+        else
+            result.add(right[j]); j++
+    append remaining left and right
+    return result
+
+comparator1 = (f1, f2) -> compare by price
+comparator2 = (f1, f2) -> compare by duration
+
+main()
+    flights = [ (F101, 5000, 2), (F102, 3000, 3), (F103, 4000, 1) ]
+    sortedByPrice = mergeSort(flights, comparator1)
+    sortedByDuration = mergeSort(flights, comparator2)
+    print sortedByPrice
+    print sortedByDuration

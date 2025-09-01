@@ -1,0 +1,45 @@
+CLASS AttendanceTracker
+    ATTRIBUTES:
+        students : List<String>
+        attendance : 2D Array of Char // rows=students, cols=days of month
+
+    CONSTRUCTOR(studentsList : List<String>, daysInMonth : Integer)
+        students = studentsList
+        attendance = NEW 2D Array[students.size()][daysInMonth]
+        FOR i FROM 0 TO students.size()-1
+            FOR j FROM 0 TO daysInMonth-1
+                attendance[i][j] = 'A' // default Absent
+
+    METHOD markAttendance(studentIndex : Integer, day : Integer, status : Char)
+        attendance[studentIndex][day-1] = status
+
+    METHOD updateAttendance(studentIndex : Integer, day : Integer, status : Char)
+        attendance[studentIndex][day-1] = status
+
+    METHOD generateMonthlyReport(studentIndex : Integer) : Integer
+        count = 0
+        FOR day FROM 0 TO attendance[studentIndex].length-1
+            IF attendance[studentIndex][day] == 'P' THEN
+                count += 1
+        RETURN count
+
+    METHOD printAttendance(studentIndex : Integer)
+        PRINT students[studentIndex], "Attendance:", attendance[studentIndex]
+END CLASS
+
+
+// Main Execution
+START
+    students = ["Student 1", "Student 2", "Student 3"]
+    tracker = NEW AttendanceTracker(students, 30)
+
+    tracker.markAttendance(0, 1, 'P')
+    tracker.markAttendance(0, 2, 'P')
+    tracker.markAttendance(0, 3, 'A')
+    tracker.markAttendance(0, 4, 'P')
+
+    tracker.updateAttendance(0, 3, 'P') // Teacher correction
+
+    tracker.printAttendance(0)
+    PRINT "Total Present Days:", tracker.generateMonthlyReport(0)
+END

@@ -1,0 +1,59 @@
+CLASS User
+    ATTRIBUTES:
+        username : String
+        password : String
+
+    CONSTRUCTOR(username, password)
+        this.username = username
+        this.password = password
+
+    METHOD login() : Boolean
+        PRINT "Base login method"
+        RETURN false
+END CLASS
+
+
+CLASS Student EXTENDS User
+    ATTRIBUTES:
+        enrolledCourses : List<String>
+
+    CONSTRUCTOR(username, password, enrolledCourses)
+        CALL super(username, password)
+        this.enrolledCourses = enrolledCourses
+
+    OVERRIDE METHOD login() : Boolean
+        IF username IS REGISTERED AND enrolledCourses IS NOT EMPTY THEN
+            PRINT "Student login successful"
+            RETURN true
+        ELSE
+            PRINT "Student login failed"
+            RETURN false
+END CLASS
+
+
+CLASS Admin EXTENDS User
+    ATTRIBUTES:
+        adminPrivileges : Boolean
+
+    CONSTRUCTOR(username, password, adminPrivileges)
+        CALL super(username, password)
+        this.adminPrivileges = adminPrivileges
+
+    OVERRIDE METHOD login() : Boolean
+        IF username IS REGISTERED AND adminPrivileges THEN
+            PRINT "Admin login successful"
+            RETURN true
+        ELSE
+            PRINT "Admin login failed"
+            RETURN false
+END CLASS
+
+
+// Main Execution
+START
+    student1 = NEW Student("john123", "pass123", ["Math", "Physics"])
+    admin1 = NEW Admin("admin001", "adminpass", true)
+
+    student1.login()
+    admin1.login()
+END

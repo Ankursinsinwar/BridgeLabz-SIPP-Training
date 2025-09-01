@@ -1,0 +1,86 @@
+CLASS Ticket
+    ATTRIBUTES:
+        movieName : String
+        seatNumber : String
+        price : Float
+        isBooked : Boolean
+
+    CONSTRUCTOR(movieName, seatNumber, price)
+        this.movieName = movieName
+        this.seatNumber = seatNumber
+        this.price = price
+        this.isBooked = false
+
+    METHOD bookTicket()
+        IF NOT isBooked THEN
+            isBooked = true
+            PRINT "Ticket booked:", movieName, seatNumber
+        ELSE
+            PRINT "Seat already booked"
+
+    METHOD cancelTicket()
+        IF isBooked THEN
+            isBooked = false
+            PRINT "Ticket cancelled:", movieName, seatNumber
+        ELSE
+            PRINT "Ticket not booked yet"
+END CLASS
+
+
+CLASS Theatre
+    ATTRIBUTES:
+        name : String
+        movieSchedule : Map<String, List<String>> // movie -> available seats
+
+    CONSTRUCTOR(name, movieSchedule)
+        this.name = name
+        this.movieSchedule = movieSchedule
+
+    METHOD issueTicket(movieName, seatNumber, price) : Ticket
+        IF seatNumber IN movieSchedule[movieName] THEN
+            ticket = NEW Ticket(movieName, seatNumber, price)
+            ticket.bookTicket()
+            movieSchedule[movieName].REMOVE(seatNumber)
+            RETURN ticket
+        ELSE
+            PRINT "Seat not available"
+            RETURN null
+
+    METHOD cancelTicket(ticket : Ticket)
+        ticket.cancelTicket()
+        movieSchedule[ticket.movieName].ADD(ticket.seatNumber)
+END CLASS
+
+
+CLASS Customer
+    ATTRIBUTES:
+        name : String
+        bookedTickets : List<Ticket>
+
+    CONSTRUCTOR(name)
+        this.name = name
+        this.bookedTickets = []
+
+    METHOD bookTicket(theatre : Theatre, movieName, seatNumber, price)
+        ticket = theatre.issueTicket(movieName, seatNumber, price)
+        IF ticket IS NOT null THEN
+            bookedTickets.ADD(ticket)
+
+    METHOD cancelTicket(theatre : Theatre, ticket : Ticket)
+        theatre.cancelTicket(ticket)
+        bookedTickets.REMOVE(ticket)
+END CLASS
+
+
+// Main Execution
+START
+    schedule = {
+        "Avengers": ["A12","A13","A14"],
+        "Inception": ["B1","B2"]
+    }
+    theatre = NEW Theatre("PVR Cinemas", schedule)
+    customer1 = NEW Customer("Ravi")
+
+    customer1.bookTicket(theatre, "Avengers", "A12", 300)
+    customer1.cancelTicket(theatre, customer1.bookedTickets[0])
+END

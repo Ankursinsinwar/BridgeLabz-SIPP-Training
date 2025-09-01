@@ -1,0 +1,85 @@
+CLASS BusStop
+    ATTRIBUTES:
+        name : String
+        next : BusStop
+
+    CONSTRUCTOR(name)
+        this.name = name
+        this.next = null
+END CLASS
+
+
+CLASS BusRoute
+    ATTRIBUTES:
+        head : BusStop
+
+    CONSTRUCTOR()
+        head = null
+
+    METHOD addStopAtEnd(name : String)
+        newStop = NEW BusStop(name)
+        IF head IS null THEN
+            head = newStop
+            RETURN
+        temp = head
+        WHILE temp.next IS NOT null
+            temp = temp.next
+        temp.next = newStop
+
+    METHOD addStopAfter(targetName : String, newStopName : String)
+        temp = head
+        WHILE temp IS NOT null
+            IF temp.name == targetName THEN
+                newStop = NEW BusStop(newStopName)
+                newStop.next = temp.next
+                temp.next = newStop
+                RETURN
+            temp = temp.next
+        PRINT targetName, "not found"
+
+    METHOD removeStop(name : String)
+        IF head IS null THEN RETURN
+        IF head.name == name THEN
+            head = head.next
+            RETURN
+        temp = head
+        WHILE temp.next IS NOT null
+            IF temp.next.name == name THEN
+                temp.next = temp.next.next
+                RETURN
+            temp = temp.next
+        PRINT name, "not found"
+
+    METHOD searchStop(name : String) : Boolean
+        temp = head
+        WHILE temp IS NOT null
+            IF temp.name == name THEN
+                RETURN true
+            temp = temp.next
+        RETURN false
+
+    METHOD printRoute()
+        temp = head
+        route = ""
+        WHILE temp IS NOT null
+            route += temp.name + " → "
+            temp = temp.next
+        PRINT route
+END CLASS
+
+
+// Main Execution
+START
+    route = NEW BusRoute()
+    route.addStopAtEnd("Depot")
+    route.addStopAtEnd("Main Street")
+    route.addStopAtEnd("City Mall")
+    route.addStopAtEnd("Hospital")
+    route.addStopAtEnd("Airport")
+
+    route.addStopAfter("City Mall", "University Stop")
+    route.removeStop("Hospital")
+
+    route.printRoute()
+    PRINT "Is Airport in route?", route.searchStop("Airport")
+END

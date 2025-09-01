@@ -1,0 +1,59 @@
+CLASS TrieNode
+        ATTRIBUTE: children : Map<Char, TrieNode>
+        ATTRIBUTE: isEndOfWord : Boolean
+        ATTRIBUTE: popularity : Integer
+
+    CONSTRUCTOR()
+        this.children = NEW Map()
+        this.isEndOfWord = false
+        this.popularity = 0
+
+
+
+CLASS Trie
+        ATTRIBUTE: root : TrieNode
+
+    CONSTRUCTOR()
+        this.root = NEW TrieNode()
+
+    METHOD insert(word : String, popularity : Integer)
+        node = root
+        FOR char IN word
+            IF char NOT IN node.children THEN
+                node.children[char] = NEW TrieNode()
+            node = node.children[char]
+        node.isEndOfWord = true
+        node.popularity = popularity
+
+    METHOD search(prefix : String, topN : Integer) : List<String>
+        node = root
+        result = []
+        FOR char IN prefix
+            IF char NOT IN node.children THEN
+                RETURN result
+            node = node.children[char]
+        DFS(node, prefix, result)
+        SORT result BY popularity DESCENDING
+        RETURN result[0 to topN-1]
+
+    METHOD DFS(node : TrieNode, currentWord : String, result : List<String>)
+        IF node.isEndOfWord THEN
+            result.ADD((currentWord, node.popularity))
+        FOR char, childNode IN node.children
+            DFS(childNode, currentWord + char, result)
+
+
+
+// Main Execution
+Main
+    trie = NEW Trie()
+    trie.insert("pizza hut", 5)
+    trie.insert("pizza point", 3)
+    trie.insert("pita bread", 4)
+    trie.insert("pizzeria", 2)
+
+    PRINT trie.search("pi", 3)
+
+    trie.insert("pineapple cafe", 6)
+    PRINT trie.search("pi", 3)
+

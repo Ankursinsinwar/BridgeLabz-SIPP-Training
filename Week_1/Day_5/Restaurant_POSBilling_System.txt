@@ -1,0 +1,100 @@
+INTERFACE TaxCalculator
+    METHOD calculateTax(amount : Float) : Float
+
+
+CLASS FoodTax IMPLEMENTS TaxCalculator
+        ATTRIBUTE: rate : Float = 0.05
+
+    OVERRIDE METHOD calculateTax(amount : Float) : Float
+        RETURN amount * rate
+
+
+CLASS BeverageTax IMPLEMENTS TaxCalculator
+        ATTRIBUTE: rate : Float = 0.12
+
+    OVERRIDE METHOD calculateTax(amount : Float) : Float
+        RETURN amount * rate
+END CLASS
+
+
+CLASS ImportedTax IMPLEMENTS TaxCalculator
+        ATTRIBUTE: rate : Float
+        customsDuty : Float
+
+    CONSTRUCTOR(rate, customsDuty)
+        this.rate = rate
+        this.customsDuty = customsDuty
+
+    OVERRIDE METHOD calculateTax(amount : Float) : Float
+        RETURN amount * rate + customsDuty
+
+
+INTERFACE DiscountPolicy
+    METHOD applyDiscount(amount : Float) : Float
+
+
+CLASS NoDiscount IMPLEMENTS DiscountPolicy
+    OVERRIDE METHOD applyDiscount(amount : Float) : Float
+        RETURN amount
+
+
+CLASS FlatDiscount IMPLEMENTS DiscountPolicy
+        ATTRIBUTE: discountAmount : Float
+
+    CONSTRUCTOR(discountAmount)
+        this.discountAmount = discountAmount
+
+    OVERRIDE METHOD applyDiscount(amount : Float) : Float
+        RETURN amount - discountAmount
+
+
+CLASS PercentageDiscount IMPLEMENTS DiscountPolicy
+        ATTRIBUTE: percentage : Float
+
+    CONSTRUCTOR(percentage)
+        this.percentage = percentage
+
+    OVERRIDE METHOD applyDiscount(amount : Float) : Float
+        RETURN amount * (1 - percentage)
+
+
+CLASS MenuItem
+        ATTRIBUTE: name : String
+        ATTRIBUTE: price : Float
+        ATTRIBUTE: taxCalculator : TaxCalculator
+
+    CONSTRUCTOR(name, price, taxCalculator)
+        this.name = name
+        this.price = price
+        this.taxCalculator = taxCalculator
+
+    METHOD getPriceWithTax() : Float
+        RETURN price + taxCalculator.calculateTax(price)
+
+
+CLASS Bill
+        ATTRIBUTE: items : List<MenuItem>
+        discountPolicy : DiscountPolicy
+
+    CONSTRUCTOR(items, discountPolicy)
+        this.items = items
+        this.discountPolicy = discountPolicy
+
+    METHOD calculateTotal() : Float
+        total = 0
+        FOR item IN items
+            total += item.getPriceWithTax()
+        total = discountPolicy.applyDiscount(total)
+        RETURN total
+
+
+// Main Execution
+Main
+    items = [
+        NEW MenuItem("Paneer Tikka", 500, NEW FoodTax()),
+        NEW MenuItem("Coke", 100, NEW BeverageTax()),
+        NEW MenuItem("Imported Cheese", 300, NEW ImportedTax(0.05, 50))
+    ]
+
+    bill = NEW Bill(items, NEW PercentageDiscount(0.10))
+    PRINT bill.calculateTotal()

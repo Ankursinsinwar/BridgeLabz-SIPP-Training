@@ -1,0 +1,70 @@
+CLASS DiagnosisContext
+        ATTRIBUTE: strategy : DiagnosisStrategy
+
+    CONSTRUCTOR()
+        this.strategy = null
+
+    METHOD setStrategy(newStrategy : DiagnosisStrategy)
+        strategy = newStrategy
+
+    METHOD diagnose(symptoms : List<String>) : List<String>
+        RETURN strategy.diagnose(symptoms)
+
+
+INTERFACE DiagnosisStrategy
+    METHOD diagnose(symptoms : List<String>) : List<String>
+
+
+CLASS RuleBasedDiagnosis IMPLEMENTS DiagnosisStrategy
+        ATTRIBUTE: rules : Map<List<String>, List<String>>
+
+    CONSTRUCTOR()
+        this.rules = {
+            ["fever","cough"] : ["Flu", "COVID-19"],
+            ["headache","nausea"] : ["Migraine"]
+        }
+
+    OVERRIDE METHOD diagnose(symptoms : List<String>) : List<String>
+        diseases = []
+        FOR ruleSymptoms, ruleDiseases IN rules
+            IF symptoms CONTAINS ALL ruleSymptoms THEN
+                diseases.ADD_ALL(ruleDiseases)
+        RETURN diseases
+
+
+CLASS AIBasedDiagnosis IMPLEMENTS DiagnosisStrategy
+        ATTRIBUTE: model : AIModel
+
+    CONSTRUCTOR(model)
+        this.model = model
+
+    OVERRIDE METHOD diagnose(symptoms : List<String>) : List<String>
+        RETURN model.predict(symptoms)
+
+
+CLASS ProbabilityBasedDiagnosis IMPLEMENTS DiagnosisStrategy
+        ATTRIBUTE: probabilityTable : Map<String, Map<String, Float>>
+
+    CONSTRUCTOR(table)
+        this.probabilityTable = table
+
+    OVERRIDE METHOD diagnose(symptoms : List<String>) : List<String>
+        results = []
+        FOR symptom IN symptoms
+            FOR disease, prob IN probabilityTable[symptom]
+                results.ADD(disease + " - " + prob)
+        RETURN results
+
+
+// Main Execution
+Main
+    context = NEW DiagnosisContext()
+    
+    context.setStrategy(NEW RuleBasedDiagnosis())
+    PRINT context.diagnose(["fever","cough","fatigue"])
+    
+    context.setStrategy(NEW AIBasedDiagnosis(model))
+    PRINT context.diagnose(["headache","dizziness","nausea"])
+    
+    context.setStrategy(NEW ProbabilityBasedDiagnosis(probTable))
+    PRINT context.diagnose(["fever","cough"])

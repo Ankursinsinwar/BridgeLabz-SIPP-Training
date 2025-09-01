@@ -1,0 +1,48 @@
+CLASS LoadBalancer
+        ATTRIBUTE: serverQueue : Queue<String>
+
+    CONSTRUCTOR()
+        this.serverQueue = NEW Queue()
+
+    METHOD addServer(serverName : String)
+        serverQueue.ENQUEUE(serverName)
+        PRINT serverName, "added to load balancer"
+
+    METHOD removeServer(serverName : String)
+        tempQueue = NEW Queue()
+        WHILE NOT serverQueue.IS_EMPTY()
+            server = serverQueue.DEQUEUE()
+            IF server != serverName THEN
+                tempQueue.ENQUEUE(server)
+        serverQueue = tempQueue
+        PRINT serverName, "removed from load balancer"
+
+    METHOD processRequest(requestName : String)
+        IF serverQueue.IS_EMPTY() THEN
+            PRINT "No servers available for", requestName
+            RETURN
+        server = serverQueue.DEQUEUE()
+        PRINT requestName, "→", server
+        serverQueue.ENQUEUE(server)
+
+
+// Main Execution
+Main
+    lb = NEW LoadBalancer()
+    lb.addServer("S1")
+    lb.addServer("S2")
+    lb.addServer("S3")
+
+    lb.processRequest("R1")
+    lb.processRequest("R2")
+    lb.processRequest("R3")
+
+    lb.addServer("S4")
+
+    lb.processRequest("R4")
+    lb.processRequest("R5")
+
+    lb.removeServer("S2")
+
+    lb.processRequest("R6")
+    lb.processRequest("R7")

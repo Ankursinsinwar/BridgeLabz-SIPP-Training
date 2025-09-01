@@ -1,0 +1,40 @@
+Class MazeSolver
+    Attribute maze
+    Attribute solution
+
+    Constructor(maze)
+        Set this.maze = maze
+        Create solution[][] same size as maze, filled with 0
+
+    Method solveMaze(x, y)
+        If (x, y) is destination
+            Set solution[x][y] = 1
+            Return true
+        If safeToMove(x, y)
+            Set solution[x][y] = 1
+            If solveMaze(x+1, y) return true
+            If solveMaze(x, y+1) return true
+            If solveMaze(x-1, y) return true
+            If solveMaze(x, y-1) return true
+            Set solution[x][y] = 0
+            Return false
+        Return false
+
+    Method safeToMove(x, y)
+        If x, y within bounds AND maze[x][y] == 0 AND solution[x][y] == 0
+            Return true
+        Else
+            Return false
+
+
+Main
+    Set maze = [
+        [0,0,1],
+        [0,0,0],
+        [1,0,0]
+    ]
+    Create solver = new MazeSolver(maze)
+    If solver.solveMaze(0,0)
+        Print "Path Found"
+    Else
+        Print "No Path"

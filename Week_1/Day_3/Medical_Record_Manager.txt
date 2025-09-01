@@ -1,0 +1,55 @@
+Interface Searchable
+    Method search(keyword)
+
+
+Interface Printable
+    Method printReport()
+
+
+Class LabReport implements Searchable, Printable
+    Attribute reportId
+    Attribute content
+
+    Constructor(reportId, content)
+        Set this.reportId = reportId
+        Set this.content = content
+
+    Method search(keyword)
+        If keyword in content
+            Return true
+        Else
+            Return false
+
+    Method printReport()
+        Print "Lab Report ID: " + reportId
+        Print "Content: " + content
+
+
+Class Prescription implements Searchable, Printable
+    Attribute prescriptionId
+    Attribute medicineList
+
+    Constructor(prescriptionId, medicineList)
+        Set this.prescriptionId = prescriptionId
+        Set this.medicineList = medicineList
+
+    Method search(keyword)
+        For each medicine in medicineList
+            If keyword == medicine
+                Return true
+        Return false
+
+    Method printReport()
+        Print "Prescription ID: " + prescriptionId
+        Print "Medicines: " + medicineList
+
+
+Main
+    Create report = new LabReport(101, "Blood Test: Normal")
+    Create prescription = new Prescription(201, ["Paracetamol", "IDontKnowOtherMedicianName"])
+
+    Call report.printReport()
+    Print "Search 'Blood': " + report.search("Blood")
+
+    Call prescription.printReport()
+    Print "Search 'Paracetamol': " + prescription.search("Paracetamol")

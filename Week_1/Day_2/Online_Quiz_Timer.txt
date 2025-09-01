@@ -1,0 +1,24 @@
+Class QuizTimer
+        Attribute timeSlots[]  // circular array of integers (seconds per question)
+        Attribute currentIndex
+        Attribute size
+
+    Constructor(slots)
+        set this.timeSlots = slots
+        set this.size = length of slots
+        set this.currentIndex = 0
+
+    Method startQuiz()
+        While currentIndex < size
+            timeRemaining = timeSlots[currentIndex]
+            While timeRemaining > 0
+                If timeRemaining <= 5
+                    Print "Warning: Only " + timeRemaining + " seconds left for this question!"
+                Wait 1 second
+                timeRemaining = timeRemaining - 1
+            currentIndex = (currentIndex + 1) % size
+
+
+Main
+    Create quiz = new QuizTimer([30, 25, 20])
+    Call quiz.startQuiz()

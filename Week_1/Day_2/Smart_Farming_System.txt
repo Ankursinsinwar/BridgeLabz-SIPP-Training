@@ -1,0 +1,43 @@
+Abstract Class Crop
+        Attribute name
+        Attribute waterRequirement // liters per day
+
+    Constructor(name, waterRequirement)
+        Set this.name = name
+        Set this.waterRequirement = waterRequirement
+
+    Abstract Method harvest()
+    Abstract Method getWaterRequirement()
+
+
+Class Rice inherits Crop
+    Constructor()
+        Call Crop constructor with ("Rice", 50)
+
+    Method harvest()
+        Print "Harvesting Rice crop."
+
+    Method getWaterRequirement()
+        Return waterRequirement
+
+
+Class Wheat inherits Crop
+    Constructor()
+        Call Crop constructor with ("Wheat", 30)
+
+    Method harvest()
+        Print "Harvesting Wheat crop."
+
+    Method getWaterRequirement()
+        Return waterRequirement
+
+
+Main
+    Create rice = new Rice()
+    Create wheat = new Wheat()
+
+    Print rice.name + " needs " + rice.getWaterRequirement() + " liters/day"
+    Call rice.harvest()
+
+    Print wheat.name + " needs " + wheat.getWaterRequirement() + " liters/day"
+    Call wheat.harvest()

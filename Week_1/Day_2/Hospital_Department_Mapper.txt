@@ -1,0 +1,34 @@
+Class Doctor
+        Attribute name
+        Attribute specialization
+
+    Constructor(name, specialization)
+        Set this.name = name
+        Set this.specialization = specialization
+
+
+Class Hospital
+        Attribute departmentMap
+
+    Constructor()
+        Create empty departmentMap
+
+    Method addDoctor(department, doctor)
+        If department not in departmentMap
+            Add department with empty list
+        Add doctor to departmentMap[department]
+
+    Method filterBySpecialization(specialization)
+        For each department in departmentMap
+            For each doctor in departmentMap[department]
+                If doctor.specialization == specialization
+                    Print doctor.name + " (" + department + ")"
+
+
+Main
+    Create hospital = new Hospital()
+    Call hospital.addDoctor("Cardiology", new Doctor("Dr. Ankur", "Heart Specialist"))
+    Call hospital.addDoctor("Neurology", new Doctor("Dr. David", "Brain Specialist"))
+
+    Print "Doctors with Heart Specialist:"
+    Call hospital.filterBySpecialization("Brain Specialist")

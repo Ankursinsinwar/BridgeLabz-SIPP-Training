@@ -1,0 +1,26 @@
+Class TrafficSignal
+        Attribute currentLight
+        Attribute timeInterval // in seconds
+
+    Constructor(startLight, timeInterval)
+        Set currentLight = startLight
+        Set this.timeInterval = timeInterval
+
+    Method changeLight()
+        If currentLight == 'RED'
+            Set currentLight = 'GREEN'
+        Else if currentLight == 'GREEN'
+            Set currentLight = 'YELLOW'
+        Else if currentLight == 'YELLOW'
+            Set currentLight = 'RED'
+
+    Method runSimulation(cycles)
+        For i = 1 to cycles
+            Print "Light: " + currentLight
+            Wait for timeInterval seconds
+            Call changeLight()
+
+
+Main
+    Create signal = new TrafficSignal('RED', 5)
+    Call signal.runSimulation(6)

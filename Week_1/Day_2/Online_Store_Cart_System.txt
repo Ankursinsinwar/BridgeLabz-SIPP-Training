@@ -1,0 +1,31 @@
+Class Item
+        Attribute name
+        Attribute price
+
+    Constructor(name, price)
+        Set this.name = name
+        Set this.price = price
+
+
+Class ShoppingCart
+        Attribute cart // List
+
+    Constructor()
+        Create empty cart
+
+    Method addItem(item)
+        Add item to cart
+
+    Generic Method calculateTotalPrice()
+        total = 0
+        For each item in cart
+            total = total + item.price
+        Return total
+
+
+Main
+    Create cart = new ShoppingCart()
+    Call cart.addItem(new Item("Laptop", 50000))
+    Call cart.addItem(new Item("Keyboard", 500))
+
+    Print "Total Price: " + cart.calculateTotalPrice()

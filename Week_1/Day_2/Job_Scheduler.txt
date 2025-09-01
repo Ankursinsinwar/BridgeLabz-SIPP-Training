@@ -1,0 +1,33 @@
+Class Job
+        Attribute name
+        Attribute deadline
+        Attribute processingTime
+
+    Constructor(name, deadline, processingTime)
+        Set this.name = name
+        Set this.deadline = deadline
+        Set this.processingTime = processingTime
+
+
+Class JobScheduler
+        Attribute priorityQueue // min-heap based on deadline, then processingTime
+
+    Constructor()
+        Create empty priorityQueue
+
+    Method addJob(job)
+        Insert job into priorityQueue
+
+    Method runScheduler()
+        While priorityQueue is not empty
+            job = Remove job with highest priority (earliest deadline)
+            Print "Running job: " + job.name + " (Time: " + job.processingTime + "s)"
+            Wait job.processingTime seconds
+
+
+Main
+    Create scheduler = new JobScheduler()
+    Call scheduler.addJob(new Job("A", 5, 3))
+    Call scheduler.addJob(new Job("B", 2, 4))
+
+    Call scheduler.runScheduler()

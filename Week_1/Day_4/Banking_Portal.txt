@@ -1,0 +1,26 @@
+class Account
+    attributes: accountNumber, balance
+    method deposit(amount)
+        balance += amount
+    method withdraw(amount)   
+        print "Base withdrawal, not specific"
+
+class SavingAccount extends Account
+    method withdraw(amount)
+        if balance - amount >= 1000      
+            balance -= amount
+        else
+            print "Insufficient funds, must keep min balance"
+
+class CurrentAccount extends Account
+    method withdraw(amount)
+        if balance - amount >= -50000    
+            balance -= amount
+        else
+            print "Overdraft limit exceeded"
+
+main()
+    acc1 = new SavingAccount(101, 5000)
+    acc1.withdraw(4500)   
+    acc2 = new CurrentAccount(102, 2000)
+    acc2.withdraw(30000)  

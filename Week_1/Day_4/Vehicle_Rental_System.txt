@@ -1,0 +1,38 @@
+interface Rentable
+    method rent(days)
+    method returnVehicle()
+
+abstract class Vehicle implements Rentable
+    attributes: vehicleId, brand, dailyRate
+    constructor(vehicleId, brand, dailyRate)
+    method rent(days)
+        cost = days * dailyRate
+        print "Rented for cost: " + cost
+    abstract method vehicleInfo()
+
+class Car extends Vehicle
+    method vehicleInfo()
+        print "Car - brand: " + brand
+
+class Bike extends Vehicle
+    method vehicleInfo()
+        print "Bike - brand: " + brand
+
+class Truck extends Vehicle
+    method vehicleInfo()
+        print "Truck - brand: " + brand
+
+class VehicleFactory
+    static method createVehicle(type, id, brand, rate)
+        if type == "CAR" return new Car(id, brand, rate)
+        if type == "BIKE" return new Bike(id, brand, rate)
+        if type == "TRUCK" return new Truck(id, brand, rate)
+        else return null
+
+main()
+    v1 = VehicleFactory.createVehicle("CAR", 1, "Honda", 1500)
+    v1.vehicleInfo()
+    v1.rent(5)
+
+    v2 = VehicleFactory.createVehicle("BIKE", 2, "Yamaha", 500)
+    v2.rent(3)

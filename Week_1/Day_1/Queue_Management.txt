@@ -1,0 +1,31 @@
+Class Customer
+        Attribute name
+        Attribute priority
+
+    Constructor(name, priority)
+        Set this.name = name
+        Set this.priority = priority
+
+
+Class CallCenter
+        Attribute emergencyQueue  // Queue
+        Attribute normalQueue     // Queue
+
+    Constructor()
+        Create empty emergencyQueue
+        Create empty normalQueue
+
+    Method addCustomer(customer)
+        If customer.priority == "emergency"
+            Enqueue customer to emergencyQueue
+        Else
+            Enqueue customer to normalQueue
+
+    Method serveCustomer()
+        If emergencyQueue is not empty
+            Dequeue from emergencyQueue and print "Serving: " + name
+        Else if normalQueue is not empty
+            Dequeue from normalQueue and print "Serving: " + name
+        Else
+            Print "No customers waiting"
+

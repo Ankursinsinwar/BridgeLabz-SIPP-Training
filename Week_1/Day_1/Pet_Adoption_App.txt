@@ -1,0 +1,55 @@
+Class Pet
+    Attributes:
+        name
+        age
+        breed
+
+    Constructor(name, age, breed)
+        Set this.name = name
+        Set this.age = age
+        Set this.breed = breed
+
+    Method displayDetails()
+        Print "Name: " + name
+        Print "Age: " + age
+        Print "Breed: " + breed
+
+
+Class Dog inherits Pet
+    Attributes:
+        barkSound
+    Constructor(name, age, breed, barkSound)
+        Call Pet constructor with (name, age, breed)
+        Set this.barkSound = barkSound
+    Method displayDetails()
+        Call Pet.displayDetails()
+        Print "Bark Sound: " + barkSound
+
+Class Cat inherits Pet
+    Attributes:
+        eyeColor
+    Constructor(name, age, breed, eyeColor)
+        Call Pet constructor with (name, age, breed)
+        Set this.eyeColor = eyeColor
+    Method displayDetails()
+        Call Pet.displayDetails()
+        Print "Eye Color: " + eyeColor
+
+Class Bird inherits Pet
+    Attributes:
+        canFly
+    Constructor(name, age, breed, canFly)
+        Call Pet constructor with (name, age, breed)
+        Set this.canFly = canFly
+    Method displayDetails()
+        Call Pet.displayDetails()
+        Print "Can Fly: " + canFly
+
+Main
+    Create dog = new Dog("Bruno", 3, "Labrador", "Woof!")
+    Create cat = new Cat("Whiskers", 2, "Persian", "Green")
+    Create bird = new Bird("Tweety", 1, "Parrot", true)
+
+    Call dog.displayDetails()
+    Call cat.displayDetails()
+    Call bird.displayDetails()

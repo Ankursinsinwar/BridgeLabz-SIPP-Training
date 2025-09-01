@@ -1,0 +1,16 @@
+Class Member
+    Attributes:
+        name
+        ID
+        membership_Date
+
+    Constructor(name, age, breed)
+        Set this.name = name
+        Set this.ID = ID
+        Set this.membership_Date = membership_Date
+
+    Method checkMembershipValidity()
+        Print "Name: " + name
+        Print "Age: " + age
+        Print "Breed: " + breed
+

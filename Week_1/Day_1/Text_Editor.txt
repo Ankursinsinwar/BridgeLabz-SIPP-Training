@@ -1,0 +1,33 @@
+Class TextEditor
+        Attribute text
+        Attribute undoStack
+
+    Constructor()
+        Set text = ""
+        Create empty undoStack
+
+    Method write(newText)
+        Push current text to undoStack
+        Set text = text + newText
+
+    Method undo()
+        If undoStack is not empty
+            Set text = Pop from undoStack
+        Else
+            Print "Nothing to undo"
+
+    Method display()
+        Print "Current Text: " + text
+
+
+Main
+    Create editor = new TextEditor()
+    Call editor.write("Hello ")
+    Call editor.write("World")
+    Call editor.display()
+
+    Call editor.undo()
+    Call editor.display()
+
+    Call editor.undo()
+    Call editor.display()

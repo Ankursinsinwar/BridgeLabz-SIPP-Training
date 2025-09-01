@@ -1,0 +1,31 @@
+Class Employee
+        Attribute name
+        Attribute department
+
+    Constructor(name, department)
+        Set this.name = name
+        Set this.department = department
+
+
+Class EmployeeManager
+    Attributes:
+        employees // ArrayList<Employee>
+
+    Constructor()
+        Create empty employees list
+
+    Method addEmployee(employee)
+        Add employee to employees list
+
+    Method filterByDepartment(dept)
+        For each emp in employees
+            If emp.department == dept
+                Print emp.name
+
+
+Main
+    Create manager = new EmployeeManager()
+    Call manager.addEmployee(new Employee("Ankur", "IT"))
+    Call manager.addEmployee(new Employee("Ravi", "HR"))
+
+    Call manager.filterByDepartment("IT")

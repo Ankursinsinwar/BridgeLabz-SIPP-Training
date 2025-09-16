@@ -6,6 +6,6 @@ public interface TransportService {
     boolean isActive();
 
     default void printServiceDetails() {
-        System.out.println(getName() + " | Fare: ₹" + getFare() + " | Active=" + isActive());
+        System.out.println(getName() + " | Fare: Rs. " + getFare() + " | Active=" + isActive());
     }
 }
